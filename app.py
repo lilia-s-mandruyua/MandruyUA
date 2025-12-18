@@ -35,7 +35,6 @@ class MandruyApp(ctk.CTk):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
 
-        # ===== HEADER =====
         header = ctk.CTkFrame(self, corner_radius=18)
         header.grid(row=0, column=0, padx=16, pady=(16, 10), sticky="ew")
 
@@ -51,7 +50,6 @@ class MandruyApp(ctk.CTk):
             font=ctk.CTkFont(size=13)
         ).pack(anchor="w", padx=16, pady=(0, 14))
 
-        # ===== BODY =====
         body = ctk.CTkFrame(self, corner_radius=18)
         body.grid(row=1, column=0, padx=16, pady=(0, 16), sticky="nsew")
         body.grid_columnconfigure((0, 1), weight=1)
@@ -65,13 +63,11 @@ class MandruyApp(ctk.CTk):
         self.btn = ctk.CTkButton(body, text="Побудувати маршрути", command=self.on_get_routes)
         self.btn.grid(row=1, column=1, padx=14, pady=(0, 10), sticky="e")
 
-        # ===== LOG =====
         self.log_box = ctk.CTkTextbox(body, corner_radius=16, height=80)
         self.log_box.grid(row=2, column=0, columnspan=2, padx=14, pady=(0, 10), sticky="nsew")
         self.log_box.insert("end", "Готово. Введіть міста та натисніть «Побудувати маршрути».\n")
         self.log_box.configure(state="disabled")
 
-        # ===== ROUTES LIST =====
         self.routes_frame = ctk.CTkScrollableFrame(
             body,
             label_text="Доступні маршрути (відсортовані)",
@@ -82,7 +78,6 @@ class MandruyApp(ctk.CTk):
             padx=14, pady=(0, 10), sticky="nsew"
         )
 
-        # ===== MAP BUTTON =====
         self.map_btn = ctk.CTkButton(
             body,
             text="Відкрити карту маршруту",
@@ -91,14 +86,12 @@ class MandruyApp(ctk.CTk):
         )
         self.map_btn.grid(row=4, column=0, padx=14, pady=(0, 14), sticky="w")
 
-    # ===== HELPERS =====
     def _log(self, msg: str):
         self.log_box.configure(state="normal")
         self.log_box.insert("end", msg + "\n")
         self.log_box.see("end")
         self.log_box.configure(state="disabled")
 
-    # ===== MAIN LOGIC =====
     def on_get_routes(self):
         origin = self.from_entry.get().strip()
         destination = self.to_entry.get().strip()
@@ -133,7 +126,6 @@ class MandruyApp(ctk.CTk):
 
         threading.Thread(target=worker, daemon=True).start()
 
-    # ===== ROUTES UI =====
     def show_routes(self, routes):
         for w in self.routes_frame.winfo_children():
             w.destroy()
@@ -174,7 +166,6 @@ class MandruyApp(ctk.CTk):
             self.map_btn.configure(state="disabled")
             self._log("ℹ️ Для цього маршруту карта недоступна")
 
-    # ===== MAP =====
     def open_map_window(self):
         if not self.last_map_html:
             self._log("ℹ️ Карта ще не створена.")
