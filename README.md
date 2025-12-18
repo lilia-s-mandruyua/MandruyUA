@@ -23,7 +23,7 @@ MandruyUA — це десктопний застосунок для багато
 ## ▶️ Запуск проєкту
 
 ```bash
-git clone https://github.com/USERNAME/MandruyUA.git
+git clone https://github.com/lilia-s-mandruyua/MandruyUA.git
 cd MandruyUA
 python3 -m venv .venv
 source .venv/bin/activate
