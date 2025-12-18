@@ -3,7 +3,6 @@ import requests
 from pathlib import Path
 from dotenv import load_dotenv
 
-# ---------- ENV ----------
 ROOT_DIR = Path(__file__).resolve().parent
 ENV_PATH = ROOT_DIR / ".env"
 
@@ -35,7 +34,7 @@ def geocode(place: str):
         "api_key": API_KEY,
         "text": place,
         "size": 1,
-        "layers": "locality"  # ⬅️ ТІЛЬКИ міста
+        "layers": "locality" 
     }
 
     r = requests.get(url, params=params, timeout=30)
@@ -51,7 +50,6 @@ def geocode(place: str):
     return lon, lat, label
 
 
-# ---------- ROUTE ----------
 def get_route(start_lonlat, end_lonlat, profile: str):
     """
     start_lonlat: (lon, lat)
@@ -61,7 +59,6 @@ def get_route(start_lonlat, end_lonlat, profile: str):
     """
     _require_key()
 
-    # ВАЖЛИВО: беремо geojson endpoint -> завжди буде features[]
     url = f"{BASE}/v2/directions/{profile}/geojson"
     headers = {"Authorization": API_KEY, "Content-Type": "application/json"}
 
@@ -82,7 +79,7 @@ def get_route(start_lonlat, end_lonlat, profile: str):
 
     feature = data["features"][0]
     summary = feature["properties"]["summary"]
-    geometry = feature["geometry"]  # GeoJSON LineString with coordinates array
+    geometry = feature["geometry"]  
 
     return {
         "distance_m": float(summary["distance"]),
