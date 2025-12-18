@@ -1,9 +1,6 @@
 import math
 from api import geocode, get_route
 
-# =========================
-# Географічна відстань (Haversine)
-# =========================
 def haversine_km(lon1, lat1, lon2, lat2):
     R = 6371  # км
     phi1 = math.radians(lat1)
@@ -17,10 +14,6 @@ def haversine_km(lon1, lat1, lon2, lat2):
     )
     return 2 * R * math.asin(math.sqrt(a))
 
-
-# =========================
-# УНІВЕРСАЛЬНИЙ ORS-МАРШРУТ
-# =========================
 def build_ors_route(origin, destination, profile, mode_name, speed_kmh, price_per_km):
     slon, slat, _ = geocode(origin)
     elon, elat, _ = geocode(destination)
@@ -43,10 +36,6 @@ def build_ors_route(origin, destination, profile, mode_name, speed_kmh, price_pe
         "source": "OpenRouteService"
     }
 
-
-# =========================
-# АВТО (ORS)
-# =========================
 def build_car_route(origin, destination):
     return build_ors_route(
         origin,
@@ -57,10 +46,6 @@ def build_car_route(origin, destination):
         price_per_km=0.10
     )
 
-
-# =========================
-# ВЕЛОСИПЕД (ORS)
-# =========================
 def build_bike_route(origin, destination):
     return build_ors_route(
         origin,
@@ -71,10 +56,6 @@ def build_bike_route(origin, destination):
         price_per_km=0.0
     )
 
-
-# =========================
-# ПІШКИ (ORS)
-# =========================
 def build_walk_route(origin, destination):
     return build_ors_route(
         origin,
@@ -85,10 +66,6 @@ def build_walk_route(origin, destination):
         price_per_km=0.0
     )
 
-
-# =========================
-# ЛІТАК (mock)
-# =========================
 def build_plane_route(origin, destination):
     slon, slat, _ = geocode(origin)
     elon, elat, _ = geocode(destination)
@@ -105,10 +82,6 @@ def build_plane_route(origin, destination):
         "source": "Mock Aviation API"
     }
 
-
-# =========================
-# ПОТЯГ (mock)
-# =========================
 def build_train_route(origin, destination):
     slon, slat, _ = geocode(origin)
     elon, elat, _ = geocode(destination)
@@ -127,10 +100,6 @@ def build_train_route(origin, destination):
         "source": "Mock Rail API"
     }
 
-
-# =========================
-# АВТОБУС (mock)
-# =========================
 def build_bus_route(origin, destination):
     slon, slat, _ = geocode(origin)
     elon, elat, _ = geocode(destination)
@@ -147,10 +116,6 @@ def build_bus_route(origin, destination):
         "source": "Mock Bus API"
     }
 
-
-# =========================
-# ВСІ МАРШРУТИ
-# =========================
 def build_all_routes(origin, destination):
     return [
         build_car_route(origin, destination),
@@ -162,9 +127,6 @@ def build_all_routes(origin, destination):
     ]
 
 
-# =========================
-# РАНЖУВАННЯ: час–ціна–зручність
-# =========================
 def rank_routes(routes, w_time=0.5, w_price=0.3, w_comfort=0.2):
     max_time = max(r["time_min"] for r in routes)
     max_price = max(r["price"] for r in routes) or 1
