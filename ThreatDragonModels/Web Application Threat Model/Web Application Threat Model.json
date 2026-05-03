@@ -1,0 +1,27 @@
+{
+  "version": "2.6.1",
+  "summary": {
+    "title": "Web Application Threat Model",
+    "owner": "Li",
+    "description": "The system represents a web application consisting of users, an admin panel, a web server and a database storing personal data. The model describes data flows, trust boundaries and potential security threats using STRIDE methodology.",
+    "id": 0
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "id": 0,
+        "title": "Web Application Threat Model",
+        "diagramType": "STRIDE",
+        "placeholder": "New STRIDE diagram description",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "version": "2.6.1",
+        "cells": [],
+        "description": "diagram"
+      }
+    ],
+    "diagramTop": 1,
+    "reviewer": "",
+    "threatTop": 0
+  }
+}
