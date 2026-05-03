@@ -33,8 +33,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "5b34d4ca-2b06-4b65-96aa-c43919d56ff6",
             "zIndex": -1,
+            "id": "5b34d4ca-2b06-4b65-96aa-c43919d56ff6",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Internal Network ",
@@ -43,7 +43,8 @@
               "hasOpenThreats": false,
               "crossingFlows": [
                 "112d16c1-10ef-4887-83fe-08af07545d65",
-                "aeff2c06-614f-4ae8-ac3b-050c57b3b846"
+                "aeff2c06-614f-4ae8-ac3b-050c57b3b846",
+                "45045de8-ff47-4b30-ac73-46adf38ae40a"
               ],
               "containedElements": [
                 "c0beda87-1378-4807-8c0b-0dd0adef0b84",
@@ -72,6 +73,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 1,
             "ports": {
               "groups": {
                 "top": {
@@ -155,7 +157,6 @@
               ]
             },
             "id": "343dbbd7-07bb-4d59-8039-b08d861bb79c",
-            "zIndex": 1,
             "data": {
               "type": "tm.Actor",
               "name": "User ",
@@ -165,13 +166,31 @@
               "reasonOutOfScope": "",
               "hasOpenThreats": false,
               "providesAuthentication": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "6bdbd811-90b1-4f17-a35d-4572775be8f7",
+                  "title": "User Identity Spoofing",
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "type": "Spoofing",
+                  "description": "An attacker may impersonate a legitimate user using stolen credentials.",
+                  "mitigation": "MFA, strong passwords, secure session management",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 4,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "repudiation": 0
+              }
             }
           },
           {
             "position": {
-              "x": -2747.5,
-              "y": -2190
+              "x": -2760,
+              "y": -2140
             },
             "size": {
               "width": 112.5,
@@ -189,6 +208,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 2,
             "ports": {
               "groups": {
                 "top": {
@@ -272,7 +292,6 @@
               ]
             },
             "id": "396d0249-1d2c-4f40-a5ca-b23511248dc7",
-            "zIndex": 2,
             "data": {
               "type": "tm.Actor",
               "name": "Adminn",
@@ -282,7 +301,25 @@
               "reasonOutOfScope": "",
               "hasOpenThreats": false,
               "providesAuthentication": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "8fadea67-3e62-44f9-89f1-b684a7fb4024",
+                  "title": "Admin Impersonation",
+                  "status": "Mitigated",
+                  "severity": "Critical",
+                  "type": "Spoofing",
+                  "description": "An attacker may gain unauthorized access to the admin panel.",
+                  "mitigation": "MFA, IP restrictions, RBAC",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 5,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "repudiation": 0
+              }
             }
           },
           {
@@ -306,6 +343,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 3,
             "ports": {
               "groups": {
                 "top": {
@@ -389,7 +427,6 @@
               ]
             },
             "id": "c0beda87-1378-4807-8c0b-0dd0adef0b84",
-            "zIndex": 3,
             "data": {
               "type": "tm.Process",
               "name": "WebApp",
@@ -402,7 +439,29 @@
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "fea056d0-f3cb-421f-b221-c82df33c8300",
+                  "title": "Denial of Service",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "type": "Denial of service",
+                  "description": "The application may become unavailable due to excessive requests.",
+                  "mitigation": "Rate limiting, monitoring",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 9,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 1,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
@@ -419,18 +478,17 @@
                 "text": "Database (PII)"
               },
               "topLine": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
+                "strokeWidth": 1.5,
                 "strokeDasharray": null
               },
               "bottomLine": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
+                "strokeWidth": 1.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 4,
             "ports": {
               "groups": {
                 "top": {
@@ -514,7 +572,6 @@
               ]
             },
             "id": "9b6cc3a5-ea6c-4251-8158-65f1b27f28d0",
-            "zIndex": 4,
             "data": {
               "type": "tm.Store",
               "name": "Database (PII) ",
@@ -522,27 +579,13 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": true,
+              "hasOpenThreats": false,
               "isALog": false,
               "isEncrypted": false,
               "isSigned": false,
               "storesCredentials": false,
               "storesInventory": false,
-              "threats": [
-                {
-                  "id": "fb724041-34f2-42ce-81b4-696a13409299",
-                  "title": "New STRIDE threat",
-                  "status": "Open",
-                  "severity": "TBD",
-                  "type": "Tampering",
-                  "description": "Provide a description for this threat",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
-                  "modelType": "STRIDE",
-                  "new": true,
-                  "number": 2,
-                  "score": ""
-                }
-              ]
+              "threats": []
             }
           },
           {
@@ -743,10 +786,42 @@
               "isEncrypted": true,
               "isPublicNetwork": true,
               "protocol": "HTTPS",
-              "threats": [],
+              "threats": [
+                {
+                  "id": "d801b847-2538-470f-a00d-da569a10ad59",
+                  "title": "Request Data Manipulation",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "Data can be modified during transmission or via malicious input.",
+                  "mitigation": "HTTPS, input validation",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 6,
+                  "score": ""
+                },
+                {
+                  "id": "781f024b-f809-4561-a8d9-3352024c2dee",
+                  "title": "Sensitive Data Exposure",
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "Sensitive data may be intercepted during transmission.",
+                  "mitigation": "TLS encryption",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 7,
+                  "score": ""
+                }
+              ],
               "trustBoundaryIds": [
                 "5b34d4ca-2b06-4b65-96aa-c43919d56ff6"
-              ]
+              ],
+              "threatFrequency": {
+                "tampering": 1,
+                "informationDisclosure": 1,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "Credentials, PII"
@@ -762,70 +837,20 @@
             },
             "vertices": [
               {
-                "x": -2560,
+                "x": -2600,
                 "y": -2000
               }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Admin Response ",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": true,
-              "isPublicNetwork": true,
-              "protocol": "HTTPS",
-              "threats": [],
-              "trustBoundaryIds": []
-            },
-            "labels": [
-              "Admin Response"
             ],
-            "id": "ad8e0b2c-c0cd-4923-94ca-4ab1aff5b9eb",
-            "source": {
-              "x": -2610,
-              "y": -2040
-            },
-            "target": {
-              "cell": "396d0249-1d2c-4f40-a5ca-b23511248dc7",
-              "port": "993255ac-cab7-40d0-8571-65b07dd48b6b"
-            },
-            "vertices": [
-              {
-                "x": -2440,
-                "y": -2030
-              },
-              {
-                "x": -2480,
-                "y": -2050
-              },
-              {
-                "x": -2550,
-                "y": -2050
-              }
-            ]
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove",
+                "vertices",
+                "source-arrowhead",
+                "target-arrowhead"
+              ],
+              "name": null
+            }
           },
           {
             "shape": "flow",
@@ -876,18 +901,58 @@
             },
             "vertices": [
               {
-                "x": -2290,
-                "y": -2170
-              },
-              {
-                "x": -2390,
-                "y": -2210
-              },
-              {
-                "x": -2430,
-                "y": -2210
+                "x": -2460,
+                "y": -2110
               }
             ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Data Flow",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": [
+                "5b34d4ca-2b06-4b65-96aa-c43919d56ff6"
+              ]
+            },
+            "labels": [
+              "Data Flow"
+            ],
+            "id": "45045de8-ff47-4b30-ac73-46adf38ae40a",
+            "source": {
+              "x": -2640,
+              "y": -2100
+            },
+            "target": {
+              "cell": "c0beda87-1378-4807-8c0b-0dd0adef0b84",
+              "port": "752027c4-227a-441a-b626-373d6a259443"
+            }
           }
         ],
         "description": "diagram"
@@ -895,6 +960,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "",
-    "threatTop": 3
+    "threatTop": 9
   }
 }
